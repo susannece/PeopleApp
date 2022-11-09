@@ -31,6 +31,20 @@
             return person;
         }
 
+        public Person GetById(int id)
+        {
+            Person? person = null;
+            foreach(Person p in peopleList)
+            {
+                if(id == p.Id)
+                {
+                    person = p;
+                    break;
+                }
+            }
+            return person;
+        }
+
         public bool Update(Person person)
         {
             Person orgPerson = Read(person.Id);

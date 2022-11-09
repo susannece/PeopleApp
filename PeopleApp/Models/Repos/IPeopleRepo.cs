@@ -9,6 +9,7 @@
         //Read
         List<Person> Read();
         Person Read(int id);
+        Person GetById(int id);
 
         //Update
         bool Update(Person person);

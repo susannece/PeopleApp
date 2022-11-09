@@ -33,7 +33,7 @@ namespace PeopleApp.Models.Services
 
         public Person FindById(int id)
         {
-            throw new NotImplementedException();
+            return _peopleRepo.GetById(id);
         }
 
         public List<Person> All()
