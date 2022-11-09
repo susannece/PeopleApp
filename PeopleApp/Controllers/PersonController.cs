@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PeopleApp.Models;
 using PeopleApp.Models.Repos;
 using PeopleApp.Models.Services;
 using PeopleApp.Models.ViewModels;
@@ -42,5 +43,18 @@ namespace PeopleApp.Controllers
             }
             return View(createPerson);
         }
+
+        public IActionResult Details(int id)
+        {
+            Person person = _peopleService.FindById(id);
+            if(person == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return View(person);
+        }
+
+
+
     }
 }
