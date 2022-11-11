@@ -50,5 +50,21 @@ namespace PeopleApp.Models.Services
         {
             throw new NotImplementedException();
         }
+
+        public Person? LastAdded()
+        {
+            List<Person> persons = _peopleRepo.Read();  
+            if(persons.Count < 1)
+            {
+                return null;
+            }
+            else
+            {
+                return persons[persons.Count-1];
+               // return persons.Last();
+            }
+        }
+
+
     }
 }
