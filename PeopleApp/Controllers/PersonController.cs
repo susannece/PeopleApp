@@ -54,7 +54,15 @@ namespace PeopleApp.Controllers
             return View(person);
         }
 
-
+        public IActionResult PersonLastEntered()
+        {
+            Person? person = _peopleService.LastAdded();
+            if(person != null)
+            {
+                return PartialView("_PersonRow", person);
+            }
+            return NotFound();
+        }
 
     }
 }
