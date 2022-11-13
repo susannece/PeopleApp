@@ -64,5 +64,25 @@ namespace PeopleApp.Controllers
             return NotFound();
         }
 
+        public IActionResult PersonLastEnteredJSON()
+        {
+            Person? person = _peopleService.LastAdded();
+            if (person != null)
+            {
+                return Json(person);
+            }
+            return NotFound();
+        }
+
+        public IActionResult AjaxPersonList()
+        {
+            List<Person> persons = _peopleService.All();
+            if(persons != null)
+            {
+                return PartialView("_PersonList", persons);
+            }
+            return BadRequest();            
+        }
+
     }
 }

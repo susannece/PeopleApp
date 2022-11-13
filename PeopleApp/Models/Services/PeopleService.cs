@@ -60,8 +60,8 @@ namespace PeopleApp.Models.Services
             }
             else
             {
-                return persons[persons.Count-1];
-               // return persons.Last();
+               // return persons[persons.Count-1];
+                return persons.Last();
             }
         }
 
