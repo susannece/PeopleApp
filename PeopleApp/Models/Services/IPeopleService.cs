@@ -11,6 +11,6 @@ namespace PeopleApp.Models.Services
         bool Edit(int id, CreatePersonViewModel personViewModel);
         bool Remove(int id);
 
-        public Person? LastAdded();
+        // public Person? LastAdded();
     }
 }

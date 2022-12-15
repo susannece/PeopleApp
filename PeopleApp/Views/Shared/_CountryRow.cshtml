@@ -1,0 +1,6 @@
+﻿@model Country
+
+<div class="row">
+    <div class="col-3">@Model.Name</div>
+    <div>@Html.ActionLink("Details", "Details", "Country", new {id = Model.Id})</div>
+</div>

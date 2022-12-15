@@ -9,9 +9,12 @@ namespace PeopleApp.Controllers
     public class PersonController : Controller
     {
         IPeopleService _peopleService;
-        public PersonController()
+        private readonly ICityService _cityService;
+
+        public PersonController(IPeopleService peopleService, ICityService cityService)
         {
-            _peopleService = new PeopleService(new InMemoryPeopleRepo());
+            _peopleService = peopleService;
+            _cityService = cityService;
         }
         public IActionResult Index()
         {
@@ -54,6 +57,18 @@ namespace PeopleApp.Controllers
             return View(person);
         }
 
+        public IActionResult Delete(int id)
+        {
+            Person person = _peopleService.FindById(id);
+            if (person != null)
+            {
+                _peopleService.Remove(id);
+                return PartialView("_PersonList", _peopleService.All());
+            }
+            return NotFound();
+        }
+
+        /*
         public IActionResult PersonLastEntered()
         {
             Person? person = _peopleService.LastAdded();
@@ -63,6 +78,7 @@ namespace PeopleApp.Controllers
             }
             return NotFound();
         }
+        
 
         public IActionResult PersonLastEnteredJSON()
         {
@@ -72,7 +88,7 @@ namespace PeopleApp.Controllers
                 return Json(person);
             }
             return NotFound();
-        }
+        }*/
 
         public IActionResult AjaxPersonList()
         {
@@ -84,5 +100,15 @@ namespace PeopleApp.Controllers
             return BadRequest();            
         }
 
+        public IActionResult DeletePersonAjax(int id)
+        {
+            Person person = _peopleService.FindById(id);
+            if (person != null)
+            {
+                _peopleService.Remove(id);
+                return PartialView("_PersonList", _peopleService.All());
+            }
+            return NotFound();
+        }
     }
 }

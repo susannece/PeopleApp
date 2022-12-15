@@ -12,15 +12,21 @@ namespace PeopleApp.Models.Services
         }
         public Person Create(CreatePersonViewModel createPerson)
         {
-            if(string.IsNullOrWhiteSpace(createPerson.Name) || string.IsNullOrWhiteSpace(createPerson.City) || string.IsNullOrWhiteSpace(createPerson.PhoneNumber)) 
+            if(string.IsNullOrWhiteSpace(createPerson.FullName) || string.IsNullOrWhiteSpace(createPerson.PhoneNumber)) 
             {
-                throw new ArgumentException("Name, City, Phonenumber not allowed with white space or empty.");
+                throw new ArgumentException("Name, and Phonenumber not allowed with white space or empty.");
             }
+
+            City city = new City() 
+            {
+                Name = createPerson.City.Name
+            };
+
             Person person = new Person()
             {
-                Name = createPerson.Name,
+                FullName = createPerson.FullName,
                 PhoneNumber = createPerson.PhoneNumber,
-                City = createPerson.City
+                City = city
             };
             person = _peopleRepo.Create(person);
             return person;
@@ -43,7 +49,9 @@ namespace PeopleApp.Models.Services
 
         public bool Remove(int id)
         {
-            throw new NotImplementedException();
+            Person person = _peopleRepo.GetById(id);   
+            bool success = _peopleRepo.Delete(person);
+            return success;
         }
 
         public List<Person> Search(string search)
@@ -51,6 +59,7 @@ namespace PeopleApp.Models.Services
             throw new NotImplementedException();
         }
 
+        /*
         public Person? LastAdded()
         {
             List<Person> persons = _peopleRepo.Read();  
@@ -64,7 +73,7 @@ namespace PeopleApp.Models.Services
                 return persons.Last();
             }
         }
-
+        */
 
     }
 }

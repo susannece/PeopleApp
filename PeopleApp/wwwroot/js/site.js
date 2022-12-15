@@ -23,3 +23,17 @@ function getPeople(actionUrl) {
         document.getElementById("result").innerHTML = response;
     });
 }
+
+function postWithAjaxDelete(actionUrl, idInput) {
+    let inputElement = $("#" + idInput)
+    let data = {
+        [inputElement.attr("name")]: inputElement.val()
+    }
+    console.log("inputElement: ", inputElement);
+    console.log("data: ", data);
+
+    $.post(actionUrl, data, function (response) {
+        console.log("Response", response);
+        document.getElementById("result").innerHTML = response;
+    });
+}

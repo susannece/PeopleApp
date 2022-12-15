@@ -7,7 +7,7 @@
 
 <dl>
     <dt>Name</dt>
-    <dd>@Model.Name</dd>
+    <dd>@Model.FullName</dd>
     <dt>City</dt>
     <dd>@Model.City</dd>
     <dt>Phone number</dt>
@@ -15,3 +15,5 @@
 </dl>
 
 <a asp-action="Index">Go Back</a>
+//Knappar för edit och delete
+<div>@Html.ActionLink("Delete", "Delete", "Person", new {id = @Model.Id})</div>

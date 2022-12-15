@@ -10,13 +10,13 @@ namespace PeopleApp.Controllers
     {
         private readonly IPeopleService _peopleService;
 
-        public HomeController()
+        public HomeController(IPeopleService peopleService)
         {
-            _peopleService = new PeopleService(new InMemoryPeopleRepo());
+            _peopleService = peopleService;
         }
         public IActionResult Index()
         {
-            return View(_peopleService.LastAdded());
+           return View();
         }
 
         public IActionResult Privacy()

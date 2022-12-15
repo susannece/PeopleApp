@@ -6,10 +6,10 @@ namespace PeopleApp.Models.ViewModels
     {
         [Display(Name="Person")]
         [Required]
-        public string? Name { get; set; }
+        public string? FullName { get; set; }
         [Required]
         public string? PhoneNumber { get; set; }
-        public string? City { get; set; }
+        public City? City { get; set; }
 
 
     }

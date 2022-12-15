@@ -1,4 +1,22 @@
+using Microsoft.EntityFrameworkCore;
+using PeopleApp.Data;
+using PeopleApp.Models.Repos;
+using PeopleApp.Models.Services;
+
 var builder = WebApplication.CreateBuilder(args);
+
+//Add DbContext to ConfigureServices
+builder.Services.AddDbContext<PeopleAppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+//builder.Services.AddScoped<IPeopleRepo, InMemoryPeopleRepo>(); // IoC & DI
+builder.Services.AddScoped<IPeopleService, PeopleService>();  // IoC & DI
+builder.Services.AddScoped<IPeopleRepo, DatabasePeopleRepo>(); // IoC & DI
+
+builder.Services.AddScoped<ICityService, CityService>();  // IoC & DI
+builder.Services.AddScoped<ICityRepo, DatabaseCityRepo>(); // IoC & DI
+
+builder.Services.AddScoped<ICountryService, CountryService>();  // IoC & DI
+builder.Services.AddScoped<ICountryRepo, DatabaseCountryRepo>(); // IoC & DI
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

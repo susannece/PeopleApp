@@ -1,0 +1,12 @@
+﻿@model IEnumerable<PeopleApp.Models.Country>
+
+
+<div class="row">
+    <div class="col-3">Name</div>
+    
+</div>
+
+@foreach(Country country in Model)
+{
+    <partial name="_CountryRow" model="country" />
+}
