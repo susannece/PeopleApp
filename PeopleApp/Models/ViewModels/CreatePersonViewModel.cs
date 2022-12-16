@@ -9,7 +9,8 @@ namespace PeopleApp.Models.ViewModels
         public string? FullName { get; set; }
         [Required]
         public string? PhoneNumber { get; set; }
-        public City? City { get; set; }
+        public int CityId { get; set; }
+        public List<City>? Cities { get; set; }
 
 
     }

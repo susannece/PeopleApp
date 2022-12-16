@@ -5,10 +5,13 @@ namespace PeopleApp.Models.Services
 {
     public class CityService : ICityService
     {
-        ICityRepo _cityRepo;
-        public CityService(ICityRepo cityRepo)
+        private readonly ICityRepo _cityRepo;
+        private readonly ICountryRepo _countryRepo;
+
+        public CityService(ICityRepo cityRepo, ICountryRepo countryRepo)
         {
             _cityRepo = cityRepo;
+            _countryRepo = countryRepo;
         }
 
         public List<City> All()
@@ -26,9 +29,9 @@ namespace PeopleApp.Models.Services
             City city = new City()
             {
                 Name = createCity.Name,
-                Persons = createCity.Persons
+                CountryId = createCity.CountryId,
             };
-            city = _cityRepo.Create(city);
+            _cityRepo.Create(city);
             return city;
         }
 

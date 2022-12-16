@@ -8,10 +8,12 @@ namespace PeopleApp.Controllers
 {
     public class CityController : Controller
     {
-        ICityService _cityService;
-        public CityController(ICityService cityService)
+        readonly ICityService _cityService;
+        private readonly ICountryService _countryService;
+        public CityController(ICityService cityService, ICountryService countryService)
         {
             _cityService = cityService;
+            _countryService = countryService;
         }
 
         // GET: CityController

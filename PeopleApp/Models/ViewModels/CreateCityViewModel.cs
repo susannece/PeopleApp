@@ -8,7 +8,13 @@ namespace PeopleApp.Models.ViewModels
         [Display(Name = "City")]
         [Required]
         public string? Name;
+        public List<Person>? Persons { get; set; }
+        public int CountryId { get; set; }
+        public List<Country>? Countries { get; set; }
+        public CreateCityViewModel() 
+        {
+            Countries = new List<Country>(); 
+        }
 
-        public List<Person>? Persons;
     }
 }

@@ -11,5 +11,9 @@ namespace PeopleApp.Models
 
         public int CountryId { get; set; }
         public Country? Country { get; set; }
+        public City()
+        {
+
+        }
     }
 }

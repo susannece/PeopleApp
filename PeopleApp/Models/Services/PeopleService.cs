@@ -5,10 +5,12 @@ namespace PeopleApp.Models.Services
 {
     public class PeopleService : IPeopleService
     {
-        IPeopleRepo _peopleRepo;
-        public PeopleService(IPeopleRepo peopleRepo)
+         IPeopleRepo _peopleRepo;
+        private readonly ICityRepo _cityRepo;
+        public PeopleService(IPeopleRepo peopleRepo, ICityRepo cityRepo)
         {
             _peopleRepo = peopleRepo;
+            _cityRepo = cityRepo;
         }
         public Person Create(CreatePersonViewModel createPerson)
         {
@@ -17,18 +19,18 @@ namespace PeopleApp.Models.Services
                 throw new ArgumentException("Name, and Phonenumber not allowed with white space or empty.");
             }
 
-            City city = new City() 
+            var city = _cityRepo.GetById(createPerson.CityId);
+            if(city == null)
             {
-                Name = createPerson.City.Name
-            };
-
+                throw new ArgumentException("There is no city.");
+            }
             Person person = new Person()
             {
                 FullName = createPerson.FullName,
                 PhoneNumber = createPerson.PhoneNumber,
                 City = city
             };
-            person = _peopleRepo.Create(person);
+            _peopleRepo.Create(person);
             return person;
         }
 

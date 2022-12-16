@@ -5,7 +5,7 @@ namespace PeopleApp.Models.Services
 {
     public class CountryService : ICountryService
     {
-        ICountryRepo _countryRepo;
+        private readonly ICountryRepo _countryRepo;
 
         public CountryService(ICountryRepo countryRepo)
         {
@@ -18,14 +18,7 @@ namespace PeopleApp.Models.Services
             {
                 throw new ArgumentNullException("Country name not allowed with white space or empty.");
             }
-
-            Country country = new Country()
-            {
-                Name = createCountry.Name,
-                Cities = createCountry.Cities
-            };
-            country = _countryRepo.Create(country);
-            return country;
+            return _countryRepo.Create(new Country(createCountry.Name)); 
         }
 
         public List<Country> All()
